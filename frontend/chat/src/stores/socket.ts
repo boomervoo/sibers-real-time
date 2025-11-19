@@ -4,12 +4,13 @@ import { io } from 'socket.io-client'
 import type { Chat } from '@/interfaces/chat.interface'
 
 export const useSocketStore = defineStore('socket', () => {
+  const API_URL = import.meta.env.VITE_API_URL
   const username = localStorage.getItem('username')
   const groups = ref<Chat[]>([])
   const messages = ref<any[]>([])
   const currentRoom = ref<string | null>(null)
 
-  const socket = io('http://localhost:3000', {
+  const socket = io(API_URL, {
     query: { username },
     autoConnect: false,
   })
